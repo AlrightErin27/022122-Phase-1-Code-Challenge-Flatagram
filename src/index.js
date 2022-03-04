@@ -41,14 +41,22 @@ fetch(imgsAPI)
 
 fetch(commentsAPI)
   .then((res) => res.json())
-  //   .then(loopAndDisplay)
+  .then(loopAndDisplay)
   .catch((error) => console.log("ERROR️✋🏻:", error));
 
 //-------------GLOBAL VARS
 let imgPic = document.querySelector("#card-image");
 let imgTitle = document.querySelector("#card-title");
-let imgLikesNum = document.querySelector("#likes-count");
 let imgLikesBtn = document.querySelector("#like-button");
+let emptyDiv = document.querySelector("#empty-div");
+
+//remove that ul
+document.querySelector("#comments-list").remove();
+//empty ul inserted
+const unOrderedLi = document.createElement("list");
+emptyDiv.append(unOrderedLi);
+unOrderedLi.setAttribute("id", "un-ordered-li");
+function showList(unOrderedLi) {}
 
 //-------------FXN: Shows the Image
 function displayImg(img) {
@@ -56,13 +64,27 @@ function displayImg(img) {
   imgPic.src = img[0].image;
   imgPic.alt = img[0].image;
   imgTitle.innerText = img[0].title;
-  imgLikesNum = img[0].likes;
+  document.querySelector("#like-count").textContent = `${img[0].likes} likes`;
+
+  //event lister for likes
+  imgLikesBtn.addEventListener("click", handleAddLike);
+  function handleAddLike(e) {
+    let updatedLikesNum = ++img[0].likes;
+    document.querySelector(
+      "#like-count"
+    ).textContent = `${updatedLikesNum} likes`;
+  }
 }
 
 //-------------FXN: Loop through Comments
 function loopAndDisplay(commentsArr) {
-  //console.log(commentsArr);
   commentsArr.forEach(displaySingleComment);
 }
-//-------------FXN: Displays specific item in looped thru arr
-function displaySingleComment(item) {}
+
+//-------------FXN: Displays specific comment in looped thru arr
+function displaySingleComment(comment) {
+  console.log(comment.content);
+  let listItem = document.createElement("li");
+  listItem.appendChild(document.createTextNode(comment.content));
+  unOrderedLi.appendChild(listItem);
+}
