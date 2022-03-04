@@ -24,7 +24,6 @@ document.querySelector("#comments-list").remove();
 const unOrderedLi = document.createElement("list");
 emptyDiv.append(unOrderedLi);
 unOrderedLi.setAttribute("id", "un-ordered-li");
-function showList(unOrderedLi) {}
 
 //-------------FXN: Shows the Image
 function displayImg(img) {
@@ -36,7 +35,7 @@ function displayImg(img) {
 
   //event lister for likes
   imgLikesBtn.addEventListener("click", handleAddLike);
-  function handleAddLike(e) {
+  function handleAddLike() {
     let updatedLikesNum = ++img[0].likes;
     document.querySelector(
       "#like-count"
@@ -63,8 +62,7 @@ form.addEventListener("submit", handleSubmit);
 function handleSubmit(e) {
   e.preventDefault();
   let inputVal = form.querySelector(".comment-input").value;
-  console.log(inputVal);
-
+  //console.log(inputVal);
   let listItem = document.createElement("li");
   listItem.appendChild(document.createTextNode(inputVal));
   unOrderedLi.appendChild(listItem);
