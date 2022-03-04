@@ -51,15 +51,23 @@ function loopAndDisplay(commentsArr) {
 
 //-------------FXN: Displays specific comment in looped thru arr
 function displaySingleComment(comment) {
-  console.log(comment.content);
+  //console.log(comment.content);
   let listItem = document.createElement("li");
   listItem.appendChild(document.createTextNode(comment.content));
   unOrderedLi.appendChild(listItem);
 }
 
 //-------------FXN: Add Comment
-postBtn.addEventListener("submit", handleSubmit);
+const form = document.querySelector("#comment-form");
+form.addEventListener("submit", handleSubmit);
 function handleSubmit(e) {
   e.preventDefault();
+  let inputVal = form.querySelector(".comment-input").value;
+  console.log(inputVal);
+
+  let listItem = document.createElement("li");
+  listItem.appendChild(document.createTextNode(inputVal));
+  unOrderedLi.appendChild(listItem);
+
+  form.reset();
 }
-///NOT quite done here 😭
