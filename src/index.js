@@ -1,39 +1,6 @@
-//console.log("🌎 Hello");
-////////----------------------IMGS API
-// [
-//     {
-//       "id": 1,
-//       "title": "Woofing those bugs away",
-//       "likes": 0,
-//       "image": "./assets/coder-dog.png"
-//     }
-//   ]
-
-////////----------------------COMMENTS API
-// [
-//     {
-//       "id": 1,
-//       "imageId": 1,
-//       "content": "What a cute dog!"
-//     },{
-//       "id": 2,
-//       "imageId": 1,
-//       "content": "He's got a nose for bugs!"
-//     },
-//     {
-//       "id": 3,
-//       "imageId": 1,
-//       "content": "Woof!"
-//     }
-//   ]
-
 const imgsAPI = "http://localhost:3000/images";
 const commentsAPI = "http://localhost:3000/comments";
 
-// fetch(toyAPI)
-// .then((res) => res.json())
-// .then(renderPreMadeToys)
-// .catch((err) => console.log("ERROR️‍🔥:", err));
 fetch(imgsAPI)
   .then((res) => res.json())
   .then(displayImg)
@@ -47,8 +14,9 @@ fetch(commentsAPI)
 //-------------GLOBAL VARS
 let imgPic = document.querySelector("#card-image");
 let imgTitle = document.querySelector("#card-title");
-let imgLikesBtn = document.querySelector("#like-button");
+const imgLikesBtn = document.querySelector("#like-button");
 let emptyDiv = document.querySelector("#empty-div");
+const postBtn = document.querySelector(".comment-button");
 
 //remove that ul
 document.querySelector("#comments-list").remove();
@@ -88,3 +56,10 @@ function displaySingleComment(comment) {
   listItem.appendChild(document.createTextNode(comment.content));
   unOrderedLi.appendChild(listItem);
 }
+
+//-------------FXN: Add Comment
+postBtn.addEventListener("submit", handleSubmit);
+function handleSubmit(e) {
+  e.preventDefault();
+}
+///NOT quite done here 😭
